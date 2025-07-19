@@ -133,5 +133,21 @@ def chat(user_id):
     return render_template('chat.html', user_id=user_id, response=response)
 
 
+@app.route('/perfil/<int:user_id>', methods=['GET', 'POST'])
+def perfil(user_id):
+    history = get_user_history(user_id)
+    if not history:
+        return "Usuário não encontrado", 404
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        preferences = request.form.getlist('preferences')
+        # aqui vamos salvar nome e preferências
+        history['name'] = name
+        history['preferences'] = preferences
+
+    return render_template('perfil.html', user_id=user_id, history=history)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

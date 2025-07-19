@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Perfil do Usuário</title>
+</head>
+<body>
+  <h1>Bem-vindo, usuário {{ user_id }}</h1>
+
+  <form method="POST">
+    <label for="name">Seu nome:</label><br>
+    <input type="text" id="name" name="name" value="{{ history.get('name', '') }}"><br><br>
+
+    <p>Quais gêneros de livros você gosta?</p>
+    {% for genre in ['ficção', 'não ficção', 'ciência', 'fantasia'] %}
+      <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}"
+        {% if genre in history.get('preferences', []) %}checked{% endif %}>
+      <label for="{{ genre }}">{{ genre.title() }}</label><br>
+    {% endfor %}
+
+    <br><button type="submit">Salvar preferências</button>
+  </form>
+</body>
+</html>
