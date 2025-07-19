@@ -102,10 +102,16 @@ def chat(user_id):
         user_decision = magical_if.start_chat(
             enable_automatic_function_calling=True
         )
-        gemini_response = user_decision.send_message(
-            f"Usuário {user_id}, histórico: {history}. Pergunta: {question}"
+        name = history.get("name", f"Usuário {user_id}")
+        preferences = history.get("preferences", [])
+        prompt = (
+            f"O nome do usuário é {name}. "
+            f"As preferências dele são: "
+            f"{', '.join(preferences) or 'nenhuma preferência registrada'}. "
+            f"Histórico de compras: {history}. "
+            f"Pergunta: {question}"
         )
-
+        gemini_response = user_decision.send_message(prompt)
         try:
             function_call = (
                 gemini_response
