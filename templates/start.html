@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bem-vindo!</title>
+</head>
+<body>
+  <h1>Crie seu perfil</h1>
+  <form method="POST">
+    <label for="name">Seu nome:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <p>Quais gêneros de livros você gosta?</p>
+    {% for genre in ['ficção', 'não ficção', 'ciência', 'fantasia'] %}
+      <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
+      <label for="{{ genre }}">{{ genre.title() }}</label><br>
+    {% endfor %}
+
+    <br><button type="submit">Começar</button>
+  </form>
+</body>
+</html>

@@ -1,6 +1,6 @@
 import os
 import google.generativeai as genai
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 from user_data import get_user_history
 from logs import save_log
 from book_recommendations import (
@@ -75,18 +75,43 @@ def ia_decision(user_id, history):
     return response.text
 
 
-@app.route('/recommend/<int:user_id>')
-def recommend(user_id):
+@app.route('/', methods=['GET', 'POST'])
+def inicio():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        preferences = request.form.getlist('preferences')
+
+        # Simula criação de novo ID
+        from user_data import user_histories
+        new_id = max(user_histories.keys()) + 1
+        user_histories[new_id] = {
+            'fiction': 0,
+            'non_fiction': 0,
+            'science': 0,
+            'fantasy': 0,
+            'name': name,
+            'preferences': preferences
+        }
+
+        return redirect(f'/chat/{new_id}')
+
+    return render_template('start.html')
+
+
+@app.route('/perfil/<int:user_id>', methods=['GET', 'POST'])
+def perfil(user_id):
     history = get_user_history(user_id)
     if not history:
         return "Usuário não encontrado", 404
-    ia_response = ia_decision(user_id, history)
-    save_log(user_id, history, ia_response)
-    return render_template(
-        'recommendation.html',
-        user_id=user_id,
-        message=ia_response
-    )
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        preferences = request.form.getlist('preferences')
+        # aqui vamos salvar nome e preferências
+        history['name'] = name
+        history['preferences'] = preferences
+
+    return render_template('profile.html', user_id=user_id, history=history)
 
 
 @app.route('/chat/<int:user_id>', methods=['GET', 'POST'])
@@ -136,23 +161,26 @@ def chat(user_id):
 
         save_log(user_id, history, response)
 
-    return render_template('chat.html', user_id=user_id, response=response)
+    return render_template(
+        'chat.html',
+        user_id=user_id,
+        response=response,
+        history=history
+    )
 
 
-@app.route('/perfil/<int:user_id>', methods=['GET', 'POST'])
-def perfil(user_id):
+@app.route('/recomendacoes/<int:user_id>')
+def recommend(user_id):
     history = get_user_history(user_id)
     if not history:
         return "Usuário não encontrado", 404
-
-    if request.method == 'POST':
-        name = request.form.get('name')
-        preferences = request.form.getlist('preferences')
-        # aqui vamos salvar nome e preferências
-        history['name'] = name
-        history['preferences'] = preferences
-
-    return render_template('perfil.html', user_id=user_id, history=history)
+    ia_response = ia_decision(user_id, history)
+    save_log(user_id, history, ia_response)
+    return render_template(
+        'recommendation.html',
+        user_id=user_id,
+        message=ia_response
+    )
 
 
 if __name__ == '__main__':
