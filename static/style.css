@@ -20,7 +20,7 @@ form {
 h1 {
   text-align: left;
   color: black;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 label {
@@ -86,9 +86,25 @@ button:hover {
 
 .chat-container:has(.chat-box):not(:has(.response-box)) .chat-box,
 .chat-container:has(.response-box):not(:has(.chat-box)) .response-box {
-width: 100%;
+  width: 100%;
 }
 
 .resposta-formatada {
   line-height: 1.6;
+}
+
+.hidden {
+    display: none;
+}
+
+.small-link {
+    font-size: 0.9em;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.small-link a {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
 }

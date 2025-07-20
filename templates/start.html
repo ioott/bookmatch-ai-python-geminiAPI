@@ -3,25 +3,57 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Bem-vindo!</title>
+
+    <script>
+        function mostrarPerfis() {
+            document.getElementById('existing-profiles').classList.remove('hidden');
+            document.getElementById('formulario-perfil').classList.add('hidden');
+            document.getElementById('link-ja-tenho').classList.add('hidden');
+            document.getElementById('link-criar').classList.remove('hidden');
+        }
+    </script>
+
 </head>
 <body>
     
     <form method="POST">
         <h1>Vamos criar seu perfil?</h1>
-        <label for="name">Seu nome:</label>
-        <input type="text" id="name" name="name" required><br><br>
 
-        <p>Quais gêneros de livros você gosta?</p>
+        <div class="small-link" id="link-ja-tenho">
+            <a href="#" onclick="mostrarPerfis(); return false;">Já tenho perfil</a>
+        </div>
 
-        {% for genre in ['ficção', 'não-ficção', 'ciência', 'fantasia'] %}
-            <label class="genre-label" for="{{ genre }}">
-                <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
-                {{ genre.title() }}
-            </label>
-        {% endfor %}
+        <div class="small-link hidden" id="link-criar">
+            <a href="/">Criar perfil</a>
+        </div>
 
-        <br>
-        <button type="submit">Começar</button>
+        <div id="existing-profiles" class="hidden">
+            <h2>Perfis existentes</h2>
+            <ul>
+                {% for id, data in profiles.items() %}
+                    <li><a href="/perfil/{{ id }}">{{ data.name or "Usuário " ~ id }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="formulario-perfil">
+            <label for="name">Seu nome:</label>
+            <input type="text" id="name" name="name" required><br><br>
+    
+            <p>Quais gêneros de livros você gosta?</p>
+    
+            {% for genre in ['ficção', 'não-ficção', 'ciência', 'fantasia'] %}
+                <label class="genre-label" for="{{ genre }}">
+                    <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
+                    {{ genre.title() }}
+                </label>
+            {% endfor %}
+    
+            <br>
+            <button type="submit">Começar</button>
+
+        </div>
+
     </form>
 
 </body>

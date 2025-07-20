@@ -2,7 +2,7 @@ import os
 import re
 import google.generativeai as genai
 from flask import Flask, redirect, render_template, request
-from user_data import get_user_history
+from user_data import get_user_history, user_histories
 from logs import save_log
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def genai_configuration():
                 test_model.start_chat().send_message("ping")
 
                 return
-            
+
             except Exception:
                 print("❌ Todas as chaves falharam.")
 
@@ -87,7 +87,6 @@ def inicio():
         preferences = request.form.getlist('preferences')
 
         # Simula criação de novo ID
-        from user_data import user_histories
         new_id = max(user_histories.keys()) + 1
         user_histories[new_id] = {
             'fiction': 0,
@@ -100,7 +99,7 @@ def inicio():
 
         return redirect(f'/chat/{new_id}')
 
-    return render_template('start.html')
+    return render_template('start.html', profiles=user_histories)
 
 
 @app.route('/perfil/<int:user_id>', methods=['GET', 'POST'])
