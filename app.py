@@ -20,7 +20,7 @@ def genai_configuration():
         return
 
     except Exception:
-        print("⚠️ Falha com a chave principal, tentando chave reserva 1.")
+        print("⚠️  Falha com a chave principal, tentando chave reserva 1.")
 
         try:
             genai.configure(api_key=os.environ['GOOGLE_API_KEY_2'])
@@ -28,22 +28,23 @@ def genai_configuration():
             # Testa se a chave reserva 1 está disponível
             test_model = genai.GenerativeModel("gemini-1.5-flash")
             test_model.start_chat().send_message("ping")
-            
+
             return
 
         except Exception:
-            print("⚠️ Falha com a chave reserva 1, tentando chave reserva 2.")
+            print("⚠️  Falha com a chave reserva 1, tentando chave reserva 2.")
 
-            genai.configure(api_key=os.environ['GOOGLE_API_KEY_3'])
+            try:
+                genai.configure(api_key=os.environ['GOOGLE_API_KEY_3'])
 
-            # Testa se a chave reserva 2 está disponível
-            test_model = genai.GenerativeModel("gemini-1.5-flash")
-            test_model.start_chat().send_message("ping")
+                # Testa se a chave reserva 2 está disponível
+                test_model = genai.GenerativeModel("gemini-1.5-flash")
+                test_model.start_chat().send_message("ping")
 
-            return
+                return
             
-        except Exception:
-            print("❌ Todas as chaves falharam.")
+            except Exception:
+                print("❌ Todas as chaves falharam.")
 
 
 genai_configuration()
