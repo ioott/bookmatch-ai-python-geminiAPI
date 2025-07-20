@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bem-vindo!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Bem-vindo!</title>
 </head>
 <body>
-  <h1>Crie seu perfil</h1>
-  <form method="POST">
-    <label for="name">Seu nome:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
+    
+    <form method="POST">
+        <h1>Vamos criar seu perfil?</h1>
+        <label for="name">Seu nome:</label>
+        <input type="text" id="name" name="name" required><br><br>
 
-    <p>Quais gêneros de livros você gosta?</p>
-    {% for genre in ['ficção', 'não ficção', 'ciência', 'fantasia'] %}
-      <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
-      <label for="{{ genre }}">{{ genre.title() }}</label><br>
-    {% endfor %}
+        <p>Quais gêneros de livros você gosta?</p>
 
-    <br><button type="submit">Começar</button>
-  </form>
+        {% for genre in ['ficção', 'não-ficção', 'ciência', 'fantasia'] %}
+            <label class="genre-label" for="{{ genre }}">
+                <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
+                {{ genre.title() }}
+            </label>
+        {% endfor %}
+
+        <br>
+        <button type="submit">Começar</button>
+    </form>
+
 </body>
 </html>

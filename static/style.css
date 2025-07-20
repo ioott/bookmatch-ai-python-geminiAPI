@@ -1,0 +1,94 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 45%;
+}
+
+h1 {
+  text-align: left;
+  color: black;
+  margin-bottom: 30px;
+}
+
+label {
+  font-weight: 500;
+  margin-top: 15px;
+  display: block;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+.genre-label {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+.chat-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.chat-box,
+.response-box {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 45%;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.chat-container:has(.chat-box):not(:has(.response-box)) .chat-box,
+.chat-container:has(.response-box):not(:has(.chat-box)) .response-box {
+width: 100%;
+}
+
+.resposta-formatada {
+  line-height: 1.6;
+}

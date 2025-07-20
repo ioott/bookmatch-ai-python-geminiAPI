@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Chat com IA</title>
 </head>
 <body>
-    <h1>Chat com a IA</h1>
-    <p><strong>Oi, {{ history.name }}, eu sei tudo sobre livros e estou aqui para te ajudar. O que você deseja saber?</strong></p>
-    <form method="post">
-        <label for="question">Sua pergunta:</label><br>
-        <input type="text" id="question" name="question" required>
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="chat-container">
+        <form method="post" class="chat-box">
 
-    {% if response %}
-        <h2>Resposta:</h2>
-        <p>{{ response }}</p>
-    {% endif %}
+            <h1>Chat com a IA</h1>
+
+            <p>Oi, {{ history.name }}, espero que esteja tendo um ótimo dia!<br>
+            Eu sei tudo sobre livros e estou aqui para te ajudar.<br>
+            O que você deseja saber?</p>
+
+            <input type="text" id="question" name="question" required>
+            <button type="submit">Enviar</button>
+        </form>
+
+        {% if response %}
+        <div class="response-box">
+            <h3>Resposta:</h3>
+            <div class="resposta-formatada">{{ response | safe }}</div>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
