@@ -10,6 +10,7 @@
             document.getElementById('formulario-perfil').classList.add('hidden');
             document.getElementById('link-ja-tenho').classList.add('hidden');
             document.getElementById('link-criar').classList.remove('hidden');
+            document.getElementById('titulo-criar-perfil').classList.add('hidden');
         }
     </script>
 
@@ -17,7 +18,7 @@
 <body>
     
     <form method="POST">
-        <h1>Vamos criar seu perfil?</h1>
+        <h1 id="titulo-criar-perfil">Vamos criar seu perfil?</h1>
 
         <div class="small-link" id="link-ja-tenho">
             <a href="#" onclick="mostrarPerfis(); return false;">Já tenho perfil</a>
@@ -28,7 +29,7 @@
         </div>
 
         <div id="existing-profiles" class="hidden">
-            <h2>Perfis existentes</h2>
+            <h1>Selecione um perfil</h1>
             <ul>
                 {% for id, data in profiles.items() %}
                     <li><a href="/perfil/{{ id }}">{{ data.name or "Usuário " ~ id }}</a></li>
@@ -41,12 +42,6 @@
             <input type="text" id="name" name="name" required><br><br>
     
             <p>Quais gêneros de livros você gosta?</p>
-
-            {% set genres = [
-                'aventura', 'autoajuda', 'biografia', 'ciência', 'drama', 'educação',
-                'espiritualidade', 'fantasia', 'ficção', 'filosofia', 'história', 'humor',
-                'mistério', 'negócios', 'não-ficção', 'poesia', 'romance', 'tecnologia', 'terror'
-            ] %}
 
             <div class="genre-grid">
                 {% for genre in genres %}
