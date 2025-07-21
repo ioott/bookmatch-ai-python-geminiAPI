@@ -52,6 +52,13 @@ genai_configuration()
 # Definir o modelo generativo com as funções disponíveis
 magical_if = genai.GenerativeModel("gemini-1.5-flash")
 
+GENRES = sorted([
+    'ficção', 'não-ficção', 'ciência', 'fantasia', 'romance', 'mistério',
+    'terror', 'aventura', 'história', 'biografia', 'autoajuda',
+    'espiritualidade', 'filosofia', 'poesia', 'drama', 'humor', 'tecnologia',
+    'educação', 'negócios'
+])
+
 
 def ia_decision(user_id, history):
     business_rules = """
@@ -99,7 +106,11 @@ def inicio():
 
         return redirect(f'/chat/{new_id}')
 
-    return render_template('start.html', profiles=user_histories)
+    return render_template(
+        'start.html',
+        profiles=user_histories,
+        genres=GENRES
+    )
 
 
 @app.route('/perfil/<int:user_id>', methods=['GET', 'POST'])
@@ -128,7 +139,12 @@ def perfil(user_id):
         history['name'] = name
         history['preferences'] = preferences
 
-    return render_template('profile.html', user_id=user_id, history=history)
+    return render_template(
+        'profile.html',
+        user_id=user_id,
+        history=history,
+        genres=GENRES
+    )
 
 
 @app.route('/chat/<int:user_id>', methods=['GET', 'POST'])
