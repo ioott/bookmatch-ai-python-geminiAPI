@@ -12,12 +12,20 @@
         <input type="text" id="name" name="name" value="{{ history.get('name', '') }}"><br><br>
 
         <p>Quais gêneros de livros você gosta?</p>
-        {% for genre in ['ficção', 'não ficção', 'ciência', 'fantasia'] %}
-        <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}"
-            {% if genre in history.get('preferences', []) %}checked{% endif %}>
-        <label for="{{ genre }}">{{ genre.title() }}</label><br>
-        {% endfor %}
+        {% set genres = [
+            'aventura', 'autoajuda', 'biografia', 'ciência', 'drama', 'educação',
+            'espiritualidade', 'fantasia', 'ficção', 'filosofia', 'história', 'humor',
+            'mistério', 'negócios', 'não-ficção', 'poesia', 'romance', 'tecnologia', 'terror'
+        ] %}
 
+        <div class="genre-grid">
+            {% for genre in genres %}
+                <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}"
+                    {% if genre in history.get('preferences', []) %}checked{% endif %}>
+                <label for="{{ genre }}">{{ genre.title() }}</label><br>
+            {% endfor %}
+        </div>
+        
         <br><button type="submit">Salvar preferências</button>
     </form>
 </body>

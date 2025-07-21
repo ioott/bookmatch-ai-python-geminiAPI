@@ -41,13 +41,21 @@
             <input type="text" id="name" name="name" required><br><br>
     
             <p>Quais gêneros de livros você gosta?</p>
-    
-            {% for genre in ['ficção', 'não-ficção', 'ciência', 'fantasia'] %}
-                <label class="genre-label" for="{{ genre }}">
-                    <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
-                    {{ genre.title() }}
-                </label>
-            {% endfor %}
+
+            {% set genres = [
+                'aventura', 'autoajuda', 'biografia', 'ciência', 'drama', 'educação',
+                'espiritualidade', 'fantasia', 'ficção', 'filosofia', 'história', 'humor',
+                'mistério', 'negócios', 'não-ficção', 'poesia', 'romance', 'tecnologia', 'terror'
+            ] %}
+
+            <div class="genre-grid">
+                {% for genre in genres %}
+                    <label class="genre-label" for="{{ genre }}">
+                        <input type="checkbox" id="{{ genre }}" name="preferences" value="{{ genre }}">
+                        {{ genre.title() }}
+                    </label>
+                {% endfor %}
+            </div>
     
             <br>
             <button type="submit">Começar</button>
