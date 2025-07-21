@@ -95,11 +95,8 @@ def inicio():
 
         # Simula criação de novo ID
         new_id = max(user_histories.keys()) + 1
+
         user_histories[new_id] = {
-            'fiction': 0,
-            'non_fiction': 0,
-            'science': 0,
-            'fantasy': 0,
             'name': name,
             'preferences': preferences
         }
@@ -138,6 +135,8 @@ def perfil(user_id):
         # aqui vamos salvar nome e preferências
         history['name'] = name
         history['preferences'] = preferences
+
+        return redirect(f'/chat/{user_id}')
 
     return render_template(
         'profile.html',
