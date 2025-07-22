@@ -37,9 +37,9 @@ def chat(user_id):
 
         prompt = (
             f"Você é uma especialista em livros e pode conversar livremente "
-            f"sobre obras literárias, personagens, enredos, gêneros e autores. "
-            f"O nome do usuário é {history.get('name', f'Usuário {user_id}')}. "
-            f"As preferências dele são: "
+            f"sobre obras literárias, personagens, enredos, gêneros e autores."
+            f" O nome do usuário é {history.get('name', f'Usuário {user_id}')}"
+            f". As preferências dele são: "
             f"{', '.join(history.get('preferences', [])) or 'nenhuma'}. "
             f"Histórico: {history}. "
             f"Pergunta: {question} "

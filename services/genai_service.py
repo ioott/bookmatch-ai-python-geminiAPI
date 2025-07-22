@@ -1,12 +1,15 @@
 import os
 import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def configure_genai():
     """
     Configura a chave de API e inicializa o modelo Gemini.
     """
-    api_key = os.environ.get("GOOGLE_API_KEY")
+    api_key = os.getenv("GOOGLE_API_KEY")
 
     if not api_key:
         raise EnvironmentError(
