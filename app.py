@@ -9,5 +9,6 @@ app.register_blueprint(home_bp)
 app.register_blueprint(chat_bp)
 app.register_blueprint(profile_bp)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+def create_app():
+    return app
