@@ -6,22 +6,25 @@
 </head>
 <body>
     <div class="chat-container">
-        <form method="post" class="chat-box">
+        <div class="chat-box">
 
-            <h1>Chat com a IA</h1>
+            <form method="post">
+                <h1>Chat com a IA</h1>
+                <p class="info-modelo"> (Você está conversando com um modelo gemini-1.5-flash)</p>
+                <p>Oi, {{ history.name }}, espero que esteja tendo um ótimo dia!<br>
+                Eu sei tudo sobre livros e estou aqui para te ajudar.<br>
+                O que você deseja saber?</p>
 
-            <p>Oi, {{ history.name }}, espero que esteja tendo um ótimo dia!<br>
-            Eu sei tudo sobre livros e estou aqui para te ajudar.<br>
-            O que você deseja saber?</p>
+                <input type="text" id="question" name="question" required>
+                <button type="submit">Enviar</button>
+            </form>
 
-            <input type="text" id="question" name="question" required>
-            <button type="submit">Enviar</button>
-        </form>
+        </div>
 
         {% if response %}
         <div class="response-box">
             <h3>Resposta:</h3>
-            <div class="resposta-formatada">{{ response | safe }}</div>
+            <p class="resposta-formatada">{{ response | safe }}</p>
         </div>
         {% endif %}
     </div>

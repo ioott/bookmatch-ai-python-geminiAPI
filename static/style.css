@@ -1,27 +1,23 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  padding-top: 50px;
   min-height: 100vh;
-  margin: 0;
-}
-
-form {
-  background-color: #fff;
-  padding: 30px 40px;
-  margin: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 45%;
+  margin: 0 auto;
 }
 
 h1 {
   text-align: left;
   color: black;
-  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.info-modelo {
+  font-size: 10px;
+  color: #666;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
 
 label {
@@ -69,9 +65,8 @@ button:hover {
 
 .chat-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
+  justify-self: center;
+  width: 80%
 }
 
 .chat-box,
@@ -83,6 +78,20 @@ button:hover {
   width: 45%;
   font-size: 16px;
   line-height: 1.6;
+  align-self: flex-start;
+  margin: 40px;
+  justify-self: center;
+}
+
+@media (max-width: 1100px) {
+  .chat-container {
+    flex-direction: column;
+  }
+  
+  .chat-box, .response-box {
+    width: 70%;
+    align-self: center;
+  }
 }
 
 .chat-container:has(.chat-box):not(:has(.response-box)) .chat-box,
@@ -91,6 +100,7 @@ button:hover {
 }
 
 .resposta-formatada {
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -115,16 +125,4 @@ button:hover {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
     margin-bottom: 1rem;
-}
-
-@media (max-width: 1100px) {
-  .chat-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .chat-box, .response-box {
-    width: 100%;
-  }
 }
