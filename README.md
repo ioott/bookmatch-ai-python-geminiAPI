@@ -1,14 +1,3 @@
----
-title: BookMatch AI - Python | GeminiAPI
-emoji: 📚
-colorFrom: purple
-colorTo: blue
-sdk: docker
-app_port: 7860
-license: mit
-pinned: true
-short_description: Uma aplicação web de recomendação de livros com IA
----
 # 📚 BookMatch AI
 
 Uma aplicação web de recomendação de livros com IA, desenvolvida com Python e Flask, integrada ao modelo Gemini da Google. 
