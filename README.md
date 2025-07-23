@@ -1,13 +1,3 @@
----
-title: BookMatch AI
-emoji: 📚
-colorFrom: purple
-colorTo: blue
-sdk: static
-app_file: app.py
-pinned: true
----
-
 # 📚 BookMatch AI
 
 Uma aplicação web de recomendação de livros com IA, desenvolvida com Python e Flask, integrada ao modelo Gemini da Google. 
@@ -32,23 +22,31 @@ Usuários criam um perfil com seus gêneros favoritos, tiram dúvidas e se infor
 
 ## 🚀 Como executar localmente
 
-1. Clone o repositório:
-   ```
-   git clone https://github.com/seu-usuario/bookmatch-ai-python-geminiAPI.git
-   cd bookmatch-ai-python-geminiAPI
-   python -m venv venv
-   source venv/bin/activate  
-   # No Windows use: venv\Scripts\activate
-   pip install -r requirements.txt
-   ````
+1. Clone o repositório e entre na pasta do projeto.
+```
+git clone https://github.com/ioott/bookmatch-ai-python-geminiAPI.git
+cd bookmatch-ai-python-geminiAPI
+```
 
-2. Crie um arquivo `.env` com sua chave da API Gemini:
+2. Crie e ative um ambiente virtual.
+```
+python -m venv venv
+# No Windows: venv\Scripts\activate
+# No Linux/Mac: source venv/bin/activate
+```
+
+3. Instale as bibliotecas necessárias.
+```
+pip install -r requirements.txt
+```
+
+4. Crie um arquivo `.env` com sua chave da API Gemini:
 
    ```
    GOOGLE_API_KEY=sua-chave-aqui
    ```
 
-3. Execute o app:
+5. Execute o app:
 
    ```
    python app.py
