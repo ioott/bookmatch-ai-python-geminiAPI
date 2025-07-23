@@ -15,18 +15,14 @@ def save_log(user_id: int, history: dict, response: str):
         f"Recomendação: {response.strip()}\n"
         f"{'-'*40}\n"
     )
-    with open("recommender.log", "a", encoding="utf-8") as f:
+    with open(LOG_FILE_PATH, "a", encoding="utf-8") as f:
         f.write(log_entry)
 
 
 def get_user_history(user_id: int) -> dict:
-    """
-    Lê o arquivo recommender.log e retorna o último histórico do usuário.
-    """
     history = {}
-
     try:
-        with open("recommender.log", "r", encoding="utf-8") as f:
+        with open(LOG_FILE_PATH, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
         current_user = None
@@ -44,13 +40,9 @@ def get_user_history(user_id: int) -> dict:
 
 
 def get_all_users() -> dict:
-    """
-    Retorna todos os usuários e seus históricos a partir do arquivo de log.
-    """
     users = {}
-
     try:
-        with open("recommender.log", "r", encoding="utf-8") as f:
+        with open(LOG_FILE_PATH, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
         current_user = None
