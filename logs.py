@@ -24,7 +24,7 @@ def get_user_history(user_id: int) -> dict:
             lines = f.readlines()
 
         current_user = None
-        
+
         for line in lines:
             if line.startswith("Usuário:"):
                 current_user = int(line.split(":")[1].strip())
@@ -35,3 +35,29 @@ def get_user_history(user_id: int) -> dict:
         pass
 
     return history
+
+
+def get_all_users() -> dict:
+    """
+    Retorna todos os usuários e seus históricos a partir do arquivo de log.
+    """
+    users = {}
+
+    try:
+        with open("recommender.log", "r", encoding="utf-8") as f:
+            lines = f.readlines()
+
+        current_user = None
+
+        for i, line in enumerate(lines):
+
+            if line.startswith("Usuário:"):
+                current_user = int(line.split(":")[1].strip())
+            elif line.startswith("Histórico:") and current_user is not None:
+                history = eval(line.split(":", 1)[1].strip())
+                users[current_user] = history
+
+    except FileNotFoundError:
+        pass
+
+    return users
