@@ -18,13 +18,10 @@ def configure_genai():
 
     try:
         genai.configure(api_key=api_key)
-
-        # Testa se a chave está funcionando
         model = genai.GenerativeModel("gemini-1.5-flash")
-        model.start_chat().send_message("ping")
-
         print("✅ Chave da API configurada com sucesso.")
         return model
 
     except Exception as e:
-        raise RuntimeError(f"❌ Falha ao configurar a chave da API: {e}")
+        print(f"❌ Falha ao configurar a chave da API: {e}")
+        return None
