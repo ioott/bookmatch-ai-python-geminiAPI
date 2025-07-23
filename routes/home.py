@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect
-from logs import get_user_history
+from time import time
+from logs import save_log, get_all_users
 from constants.genres import GENRES
 
 home_bp = Blueprint('home', __name__)
@@ -14,18 +15,24 @@ def inicio():
         name = request.form.get('name')
         preferences = request.form.getlist('preferences')
 
-        # Simula criação de novo ID com base no maior já existente
-        new_id = max(get_user_history.keys(), default=0) + 1
+        new_id = int(time())
 
-        get_user_history[new_id] = {
+        initial_history = {
             'name': name,
-            'preferences': preferences
+            'preferences': preferences,
+            'chat': []
         }
+
+        save_log(
+            user_id=new_id,
+            history=initial_history,
+            response="Perfil criado."
+        )
 
         return redirect(f'/chat/{new_id}')
 
     return render_template(
         'start.html',
-        profiles=get_user_history,
+        profiles=get_all_users(),
         genres=GENRES
     )
