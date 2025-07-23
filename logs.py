@@ -1,4 +1,13 @@
+import os
 from datetime import datetime
+
+# Garante a compatibilidade do caminho do log entre os ambientes
+if os.name == 'nt':
+    # Se for Windows, usa o caminho local na mesma pasta
+    LOG_FILE = "recommender.log"
+else:
+    # Para qualquer outro sistema (Linux, etc.), usa a pasta /tmp
+    LOG_FILE = "/tmp/recommender.log"
 
 
 def save_log(user_id: int, history: dict, response: str):
