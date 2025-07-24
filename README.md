@@ -1,3 +1,5 @@
+<img alt="Python" src="https://img.shields.io/badge/-Python-black?style=flat-square&logo=python">    <img alt="Flask" src="https://img.shields.io/badge/-Flask-black?style=flat-square&logo=flask">    <img alt="HTML" src="https://img.shields.io/badge/-Html-black?style=flat-square&logo=html">    <img alt="CSS" src="https://img.shields.io/badge/-Css-black?style=flat-square&logo=css">    <img alt="GeminiAPI" src="https://img.shields.io/badge/-GeminiAPI-black?style=flat-square&logo=geminiapi">     
+
 # 📚 BookMatch AI
 
 Uma aplicação web de recomendação de livros com IA, desenvolvida com Python e Flask, integrada ao modelo Gemini da Google. 
